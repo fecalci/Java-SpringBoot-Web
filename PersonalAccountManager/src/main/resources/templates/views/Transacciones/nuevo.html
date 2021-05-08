@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/template :: head"></head>
+<body>
+	<header th:replace="plantillas/template :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header bg-dark text-white">
+				<div class="card-body">
+					<form th:action="@{/views/Transacciones/guardar}" th:object="${Transacciones}" method="post" class="row g-3">
+						<div class="col-12">
+						<input type = "hidden" th:field="*{id}">
+							<label for="detalle" class="form-label">Detalle</label> <input
+								type="text" th:field="*{detalle}" class="form-control" id="detalle"
+								placeholder="El detalle">
+						</div>
+						<div class="col-12">
+							<label for="Fecha" class="form-label">Fecha</label> <input
+								type="text" th:field="*{fecha}" class="form-control" id="fecha"
+								placeholder="La fecha en que se realizo">
+						</div>
+						<div class="col-12">
+							<label for="Monto" class="form-label">Monto</label> <input
+								type="text" th:field="*{monto}" class="form-control" id="monto"
+								placeholder="El monto de la transaccion">
+						</div>		
+						<div class="col-12">
+							<label for="Tipo" class="form-label">Tipo</label> <input
+								type="text" th:field="*{tipo}" class="form-control" id="tipo"
+								placeholder="Tipo de transaccion">
+						</div>		
+						<div class="col-12">
+							<label for="Titulo" class="form-label">Titulo</label> <input
+								type="text" th:field="*{titulo}" class="form-control" id="titulo"
+								placeholder="Titulo de la transaccion">
+						</div>														
+										
+						
+						<div class="card-footer bg-dark">
+							<input type="submit" class="btn btn-primary btn-sm" value="Guardar"/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="plantillas/template :: footer"></footer>
+</body>
+</html>     

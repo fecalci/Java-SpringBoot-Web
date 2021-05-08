@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/template :: head"></head>
+<body>
+  <header th:replace="plantillas/template :: header"></header>
+  <div>
+    <h1 th:text="${titulo}"></h1>
+  </div>
+  <div class="container">
+  
+  <a class="btn btn-primary btn-sm" th:href="@{/views/Transacciones/nuevo}" th:text="'Nueva Transaccion'" 
+  title="Crear nuevo registro"></a>
+  
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Detalle</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Monto</th>      
+      <th scope="col">Tipo</th>  
+      <th scope="col">Titulo</th>        
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="tran:${Transacciones}">
+      <th scope="row" th:text="${tran.id}"></th>
+      <td th:text="${tran.Detalle}"></td>
+      <td th:text="${tran.Fecha}"></td>
+      <td th:text="${tran.Monto}"></td>
+      <td th:text="${tran.Tipo}"></td>
+      <td th:text="${tran.Titulo}"></td>
+      
+      <td> 
+      	<a class ="btn btn-success btn-sm" th:href="@{/views/Transacciones/editar/} + ${tran.id}" th:text ="Editar" title ="Editar Registro"></a>
+      	<a class ="btn btn-danger btn-sm" th:href="@{/views/Transacciones/eliminar/} + ${tran.id}" th:text ="Eliminar" title ="Eliminar Registro"></a>
+      </td>
+            
+    </tr>
+  </tbody>
+</table>
+  </div>
+  <footer th:replace="plantillas/template :: footer"></footer>
+</body>
+</html>
