@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/template :: head"></head>
+<body>
+	<header th:replace="plantillas/template :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header bg-dark text-white">
+				<div class="card-body">
+					<form th:action="@{/views/personas/guardar}" th:object="${persona}" method="post" class="row g-3">
+						<div class="col-12">
+						<input type = "hidden" th:field="*{id}">
+							<label for="nombre" class="form-label">Nombre</label> <input
+								type="text" th:field="*{nombre}" class="form-control" id="nombre"
+								placeholder="Su nombre">
+						</div>
+						<div class="col-12">
+							<label for="Apellido" class="form-label">Apellido</label> <input
+								type="text" th:field="*{apellido}" class="form-control" id="apellido"
+								placeholder="Su apellido">
+						</div>
+						
+						<div class="card-footer bg-dark">
+							<input type="submit" class="btn btn-primary btn-sm" value="Guardar"/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="plantillas/template :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/template :: head"></head>
+<body>
+  <header th:replace="plantillas/template :: header"></header>
+  <div>
+    <h1 th:text="${titulo}"></h1>
+  </div>
+  <div class="container">
+  
+  <a class="btn btn-primary btn-sm" th:href="@{/views/Transacciones/nuevo}" th:text="'Nueva Transaccion'" 
+  title="Crear nuevo registro"></a>
+  
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Detalle</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Monto</th>      
+      <th scope="col">Tipo</th>  
+      <th scope="col">Titulo</th>          
+      <th scope="col">Persona</th>  
+      <th scope="col">Operaciones</th>  
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="tran:${Transacciones}">
+      <th scope="row" th:text="${tran.id}"></th>
+      <th scope="row" th:text="${tran.Detalle}"></th>
+      <th scope="row" th:text="${tran.Fecha}"></th>
+      <th scope="row" th:text="${tran.Monto}"></th>
+      <th scope="row" th:text="${tran.Tipo}"></th>
+      <th scope="row" th:text="${tran.Titulo}"></th>
+      <th scope="row" th:text="${tran.Persona.nombre}"></th>
+     
+      <td> 
+      	<a class ="btn btn-success btn-sm" th:href="@{/views/Transacciones/editar/} + ${tran.id}" th:text ="Editar" title ="Editar Registro"></a>
+      	<a class ="btn btn-danger btn-sm" th:href="@{/views/Transacciones/eliminar/} + ${tran.id}" th:text ="Eliminar" title ="Eliminar Registro"></a>
+      </td>
+            
+    </tr>
+  </tbody>
+</table>
+
+<!-- Paginación -->
+<div align="center">
+
+<div th:if ="${totalPaginas > 1}">
+<div class= "row col-sm-10">
+	<div class= "cols-sm-2">Total registros:[[${totalItems}]] </div>
+	<div class = "col-sm1">
+	<span th:each="p:${#numbers.sequence(1, totalPaginas)}">
+		<a th:if="${paginaActual != p}" th:href="@{'/views/Transacciones/' + ${p}}">[[${p}]] </a>
+		<span th:unless="${paginaActual != p}">[[${p}]]</span>	
+	</span>
+	</div>
+	
+	<div class = "col-sm-1">
+		<a th:if="${paginaActual < totalPaginas}" th:href="@{'/views/Transacciones/' + ${paginaActual + 1}}">Siguiente</a>
+		<span th:unless="${paginaActual < totalPaginas}">Siguiente</span>
+	</div>
+	
+	<div class = "col-sm-1">
+		<a th:if="${paginaActual < totalPaginas}" th:href="@{'/views/Transacciones/' + ${paginaActual + 1}}">Ultimo</a>
+		<span th:unless="${paginaActual < totalPaginas}">Ultimo</span>
+	</div>	
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- Fin paginado -->
+
+
+  </div>
+  <footer th:replace="plantillas/template :: footer"></footer>
+</body>
+</html>
