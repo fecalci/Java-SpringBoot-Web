@@ -3,6 +3,7 @@ package com.sistemasactivos.pam.controller;
 import java.util.List;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sistemasactivos.pam.models.entity.Persona;
 
@@ -40,18 +42,19 @@ public class TransaccionesController {
 		model.addAttribute("Transacciones",listadoTransacciones);
 		*/
 		
-		return paginacion(1,model);
+		return paginacion(1,model, "id", "desc");
 		
 		
 				
 	}	
 	
 	@GetMapping("/{paginaNum}")
-	public String paginacion(@PathVariable("paginaNum") Integer paginaNum, Model model) {
+	public String paginacion(@PathVariable("paginaNum") Integer paginaNum, Model model, @RequestParam("orden")String orden, @RequestParam("dire") String dire) {
+		
 		
 		int paginaTot = 5;
 		
-		Page<Transacciones> page = TransaccionesService.paginacion(paginaNum, paginaTot);
+		Page<Transacciones> page = TransaccionesService.paginacion(paginaNum, paginaTot,orden,dire);
 		List<Transacciones> listaTransacciones = page.getContent();
 
 
@@ -60,8 +63,12 @@ public class TransaccionesController {
 		model.addAttribute("totalItems",page.getTotalElements());
 		model.addAttribute("Transacciones",listaTransacciones);
 		
-		return "/views/Transacciones/listar";
+		model.addAttribute("orden",orden);
+		model.addAttribute("dire",dire);
+		model.addAttribute("invertirOrdenDir", dire.equals("asc") ? "desc" : "asc");
 		
+		
+		return "/views/Transacciones/listar";		
 		
 	}
 	

@@ -14,25 +14,25 @@
   <table class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Detalle</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Monto</th>      
-      <th scope="col">Tipo</th>  
-      <th scope="col">Titulo</th>          
-      <th scope="col">Persona</th>  
+      <th scope="col"><a th:href="@{'/views/Transacciones/' + ${paginaActual} + '?orden=id&dire=' + ${invertirOrdenDir}}">ID</a></th>
+      <th scope="col"><a th:href="@{'/views/Transacciones/' + ${paginaActual} + '?orden=detalle&dire=' + ${invertirOrdenDir}}">Detalle</a></th>
+      <th scope="col"><a th:href="@{'/views/Transacciones/' + ${paginaActual} + '?orden=fecha&dire=' + ${invertirOrdenDir}}">Fecha</a></th>
+      <th scope="col"><a th:href="@{'/views/Transacciones/' + ${paginaActual} + '?orden=monto&dire=' + ${invertirOrdenDir}}">Monto</a></th>     
+      <th scope="col"><a th:href="@{'/views/Transacciones/' + ${paginaActual} + '?orden=tipo&dire=' + ${invertirOrdenDir}}">Tipo</a></th>  
+      <th scope="col"><a th:href="@{'/views/Transacciones/' + ${paginaActual} + '?orden=titulo&dire=' + ${invertirOrdenDir}}">Titulo</a></th>          
+      <th scope="col"><a th:href="@{'/views/Transacciones/' + ${paginaActual} + '?orden=persona.nombre&dire=' + ${invertirOrdenDir}}">Persona</a></th>  
       <th scope="col">Operaciones</th>  
     </tr>
   </thead>
   <tbody>
     <tr th:each="tran:${Transacciones}">
       <th scope="row" th:text="${tran.id}"></th>
-      <th scope="row" th:text="${tran.Detalle}"></th>
-      <th scope="row" th:text="${tran.Fecha}"></th>
-      <th scope="row" th:text="${tran.Monto}"></th>
-      <th scope="row" th:text="${tran.Tipo}"></th>
-      <th scope="row" th:text="${tran.Titulo}"></th>
-      <th scope="row" th:text="${tran.Persona.nombre}"></th>
+      <th scope="row" th:text="${tran.detalle}"></th>
+      <th scope="row" th:text="${tran.fecha}"></th>
+      <th scope="row" th:text="${tran.monto}"></th>
+      <th scope="row" th:text="${tran.tipo}"></th>
+      <th scope="row" th:text="${tran.titulo}"></th>
+      <th scope="row" th:text="${tran.persona.nombre}"></th>
      
       <td> 
       	<a class ="btn btn-success btn-sm" th:href="@{/views/Transacciones/editar/} + ${tran.id}" th:text ="Editar" title ="Editar Registro"></a>
@@ -51,18 +51,18 @@
 	<div class= "cols-sm-2">Total registros:[[${totalItems}]] </div>
 	<div class = "col-sm1">
 	<span th:each="p:${#numbers.sequence(1, totalPaginas)}">
-		<a th:if="${paginaActual != p}" th:href="@{'/views/Transacciones/' + ${p}}">[[${p}]] </a>
+		<a th:if="${paginaActual != p}" th:href="@{'/views/Transacciones/' + ${p} + '?orden=' +${orden}+ '&dire=' + ${dire}}">[[${p}]] </a>
 		<span th:unless="${paginaActual != p}">[[${p}]]</span>	
 	</span>
 	</div>
 	
 	<div class = "col-sm-1">
-		<a th:if="${paginaActual < totalPaginas}" th:href="@{'/views/Transacciones/' + ${paginaActual + 1}}">Siguiente</a>
+		<a th:if="${paginaActual < totalPaginas}" th:href="@{'/views/Transacciones/' + ${paginaActual + 1} + '?orden=' + ${orden} + '&dire=' + ${dire}}">Siguiente</a>
 		<span th:unless="${paginaActual < totalPaginas}">Siguiente</span>
 	</div>
 	
 	<div class = "col-sm-1">
-		<a th:if="${paginaActual < totalPaginas}" th:href="@{'/views/Transacciones/' + ${paginaActual + 1}}">Ultimo</a>
+		<a th:if="${paginaActual < totalPaginas}" th:href="@{'/views/Transacciones/' + ${totalPaginas} + '?orden=' + ${orden} + '&dire=' + ${dire}}">Ultimo</a>
 		<span th:unless="${paginaActual < totalPaginas}">Ultimo</span>
 	</div>	
 

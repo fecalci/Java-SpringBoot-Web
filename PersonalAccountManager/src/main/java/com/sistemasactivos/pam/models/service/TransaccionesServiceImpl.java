@@ -3,13 +3,18 @@ package com.sistemasactivos.pam.models.service;
 import java.util.List;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.sistemasactivos.pam.models.entity.Transacciones;
 import com.sistemasactivos.pam.models.repository.TransaccionesRepository;
+
+
+
 
 @Service
 public class TransaccionesServiceImpl implements ITransaccionesService {
@@ -37,17 +42,30 @@ public class TransaccionesServiceImpl implements ITransaccionesService {
 	@Override
 	public void eliminar(int id) {
 		TransaccionesRepository.deleteById(id);
-		
 	}
 
 
 	@Override
-	public Page<Transacciones> paginacion(Integer paginaNum, Integer paginaTot) {
+	public Page<Transacciones> paginacion(Integer paginaNum, Integer paginaTot,String sortCampo, String sortOrden) {
 		
-		Pageable pag = PageRequest.of(paginaNum - 1, paginaTot);
+		Sort ordenar = sortOrden.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortCampo).ascending() : Sort.by(sortCampo).descending();
+		
+		Pageable pag = PageRequest.of(paginaNum - 1, paginaTot, ordenar);
 		
 		return this.TransaccionesRepository.findAll(pag);
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

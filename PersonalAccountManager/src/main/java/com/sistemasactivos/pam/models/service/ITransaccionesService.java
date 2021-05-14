@@ -12,6 +12,6 @@ public interface ITransaccionesService {
 	public void guardar(Transacciones transacciones);
 	public Transacciones buscarPorId(int id);
 	public void eliminar(int id);
-	Page<Transacciones> paginacion(Integer paginaNum, Integer paginaTot);
+	Page<Transacciones> paginacion(Integer paginaNum, Integer paginaTot, String sortCampo, String sortOrden);
 	
 }
